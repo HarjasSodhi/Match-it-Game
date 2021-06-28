@@ -57,7 +57,7 @@ function divGenerator(side) {
                 currDragging = e.currentTarget;
             })
             div.addEventListener("dragend", function () {
-                if (!currDragging.classList.contains("removed")) {
+                if (!currDragging.classList.contains("removed") && currdragOver) {
                     let score = document.querySelector(".score-card");
                     let scoreArr = score.innerText.split(":");
                     if (currDragging.style.backgroundColor == currdragOver.style.backgroundColor) {

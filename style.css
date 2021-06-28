@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+  font-family: "Raleway", sans-serif;
+}
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+}
+.colorContainer {
+  height: 100vh;
+  width: 12vw;
+}
+.colorContainer div {
+  width: 100%;
+  height: 20%;
+}
+.right-side {
+  height: 100%;
+  width: 40%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.left-side {
+  height: 100%;
+  width: 40%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.random-divs {
+  height: 20%;
+  width: 20%;
+  border: 0.1px solid white;
+}
+.score-card,
+.timer {
+  position: fixed;
+  top: 0.1rem;
+  right: 0.7rem;
+  height: 3rem;
+  width: 12rem;
+  z-index: 3;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2.5rem;
+}
+.timer {
+  left: -2rem;
+  top: 0rem;
+}

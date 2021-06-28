@@ -37,7 +37,7 @@ for (let i = 0; i < middle.length; i++) {
     middle[i].addEventListener("dragleave",function(e){
         setTimeout(() => {
             currdragOver=undefined;
-        }, 1);
+        }, 100);
     })
 }
 

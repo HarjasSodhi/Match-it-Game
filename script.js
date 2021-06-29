@@ -28,15 +28,15 @@ let currdragOver;
 
 divGenerator(rightSide);
 divGenerator(leftSide);
-
+let tottalDivsGenerated = divCounter;
 
 for (let i = 0; i < middle.length; i++) {
     middle[i].addEventListener("dragover", function (e) {
         currdragOver = e.currentTarget;
     })
-    middle[i].addEventListener("dragleave",function(e){
+    middle[i].addEventListener("dragleave", function (e) {
         setTimeout(() => {
-            currdragOver=undefined;
+            currdragOver = undefined;
         }, 50);
     })
 }
@@ -77,7 +77,7 @@ function divGenerator(side) {
                     if (divCounter == 0) {
                         clearInterval(clock);
                         alert(`Game Over.
-Your Score Was ${scoreArr[1]} 
+Your Score Was ${scoreArr[1]}/${tottalDivsGenerated} 
 Your Time Was ${timer.innerText} minute(s)`)
                         location.reload();
                     }

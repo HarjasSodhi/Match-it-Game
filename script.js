@@ -3,6 +3,12 @@ let rightSide = document.querySelector(".right-side");
 let leftSide = document.querySelector(".left-side");
 let middle = document.querySelectorAll(".colorContainer div");
 let timer = document.querySelector(".timer");
+let selectedDiv = undefined;
+
+if(window.innerWidth<1000 && !sessionStorage.getItem('notified')){
+    alert("rotate your device your better Experience");
+    sessionStorage.setItem('notified', 'true');
+}
 
 let clock = setInterval(function () {
     let time = timer.innerText;
@@ -33,12 +39,39 @@ let tottalDivsGenerated = divCounter;
 for (let i = 0; i < middle.length; i++) {
     middle[i].addEventListener("dragover", function (e) {
         currdragOver = e.currentTarget;
+    });
+    middle[i].addEventListener("touchstart", function (e) {
+        if (selectedDiv) {
+            let score = document.querySelector(".score-card");
+            let scoreArr = score.innerText.split(":");
+            if (selectedDiv.style.backgroundColor == e.currentTarget.style.backgroundColor) {
+                scoreArr[1] = parseInt(scoreArr[1]) + 1;
+            }
+            else {
+                scoreArr[1] = parseInt(scoreArr[1]) - 1;
+            }
+            let newScore = scoreArr.join(":");
+            score.innerText = newScore;
+            selectedDiv.style.background = "none";
+            selectedDiv.setAttribute("draggable", false);
+            selectedDiv.classList.add("removed");
+            selectedDiv.classList.remove("selected-div");
+            selectedDiv = undefined;
+            divCounter--;
+            if (divCounter == 0) {
+                clearInterval(clock);
+                alert(`Game Over.
+Your Score Was ${scoreArr[1]}/${tottalDivsGenerated} 
+Your Time Was ${timer.innerText} minute(s)`)
+                location.reload();
+            }
+        }
     })
     middle[i].addEventListener("dragleave", function (e) {
         setTimeout(() => {
             currdragOver = undefined;
         }, 50);
-    })
+    });
 }
 
 
@@ -82,7 +115,16 @@ Your Time Was ${timer.innerText} minute(s)`)
                         location.reload();
                     }
                 }
+            });
+
+            div.addEventListener("touchstart", function (e) {
+                if (!e.currentTarget.classList.contains("removed")) {
+                    if (selectedDiv) selectedDiv.classList.remove("selected-div");
+                    selectedDiv = e.currentTarget;
+                    e.currentTarget.classList.add("selected-div");
+                }
             })
+
         }
         div.style.backgroundColor = colors[num];
         side.append(div);
